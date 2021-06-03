@@ -1,6 +1,5 @@
 package com.koreait.spring.user;
 
-import com.koreait.spring.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +15,11 @@ public class UserController {
     @RequestMapping(value="/login")
     public String login() {
         return "user/login";
+    }
+
+    @RequestMapping(value="/login", method=RequestMethod.POST)
+    public String login(UserEntity param) {
+        return "redirect:" + service.login(param);
     }
 
     @RequestMapping(value="/join")
