@@ -18,6 +18,8 @@
     <!-- 애노테이션으로 빈 등록할 클래스들을 스캔뜨는 시작 패키지를 설정 -->
     <context:component-scan base-package="com.koreait.spring" />
 
+    <mvc:resources mapping="/res/**" location="/res/" />
+
     <!-- 사용할 파일명을 완성해주는 객체 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />

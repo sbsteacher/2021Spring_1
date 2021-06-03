@@ -12,11 +12,11 @@ public class UserService {
     public String login(UserEntity param) {
         UserEntity result = mapper.selUser(param);
         if(result == null) { //아이디 없음
-            return "/user/login";
+            return "/user/login?err=1";
         } else if(BCrypt.checkpw(param.getUpw(), result.getUpw())) { //로그인 성공
             return "/board/list";
         } else { //비밀번호 틀림
-            return "/user/login";
+            return "/user/login?err=2";
         }
     }
 
