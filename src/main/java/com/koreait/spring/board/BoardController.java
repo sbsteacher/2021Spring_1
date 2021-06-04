@@ -19,4 +19,10 @@ public class BoardController {
         model.addAttribute("list", list);
         return "board/list";
     }
+
+    @RequestMapping("/detail")
+    public String detail(BoardDTO param) {
+        System.out.println("iboard : " + param.getIboard());
+        return "";
+    }
 }
