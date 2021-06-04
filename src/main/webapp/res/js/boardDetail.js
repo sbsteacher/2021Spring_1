@@ -183,7 +183,7 @@ function closeModModal() {
 	cmtModModalElem.className = 'displayNone';
 }
 
-getListAjax(); //이 파일이 임포트되면 함수 1회 호출!
+//getListAjax(); //이 파일이 임포트되면 함수 1회 호출!
 
 
 

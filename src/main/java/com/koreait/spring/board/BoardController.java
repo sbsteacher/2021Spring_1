@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.List;
 
 @Controller
@@ -21,8 +20,12 @@ public class BoardController {
     }
 
     @RequestMapping("/detail")
-    public String detail(BoardDTO param) {
+    public String detail(BoardDTO param, Model model) {
         System.out.println("iboard : " + param.getIboard());
-        return "";
+        BoardDomain data = service.selBoard(param);
+        model.addAttribute(data);
+        return "board/detail";
     }
+
+
 }
