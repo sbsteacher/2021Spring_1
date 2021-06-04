@@ -3,7 +3,7 @@ var cmtListElem = document.querySelector('#cmtList');
 var cmtModModalElem = document.querySelector('#modal');
 
 function regCmt() {
-	var cmtVal = cmtFrmElem.cmt.value;	
+	var cmtVal = cmtFrmElem.cmt.value;
 	var param = {
 		iboard: cmtListElem.dataset.iboard,
 		cmt: cmtVal
@@ -15,7 +15,7 @@ function regCmt() {
 function regAjax(param) {
 	const init = {
 		method: 'POST',				
-	    body: new URLSearchParams(param)
+	    body: JSON.stringify(param)
 	};
 	
 	fetch('cmtInsSel', init)
@@ -26,12 +26,11 @@ function regAjax(param) {
 		console.log(myJson);
 		
 		switch(myJson.result) {
-			case 0:
+			case 0: //등록 실패
 				alert('등록 실패!');
 			break;
-			case 1:
+			case 1: //등록 성공
 				cmtFrmElem.cmt.value = '';
-				
 				getListAjax();
 			break;
 		}
