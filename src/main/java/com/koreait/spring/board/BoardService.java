@@ -29,4 +29,8 @@ public class BoardService {
         param.setIuser(loginUser.getIuser());
         return cmtMapper.insBoardCmt(param);
     }
+    public List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param){
+        return cmtMapper.selBoardCmtList(param);
+    }
+
 }

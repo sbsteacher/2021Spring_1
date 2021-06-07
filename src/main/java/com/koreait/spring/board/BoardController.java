@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,39 +35,17 @@ public class BoardController {
 
     @ResponseBody
     @RequestMapping(value="/cmtIns", method = RequestMethod.POST)
-    public Map<String, Integer> cmtInsSel(@RequestBody BoardCmtEntity param) {
+    public Map<String, Integer> cmtIns(@RequestBody BoardCmtEntity param) {
         System.out.println("param = " + param);
-
         int result = service.insBoardCmt(param);
-
         Map<String, Integer> data = new HashMap();
         data.put("result", result);
         return data;
     }
 
     @ResponseBody
-    @RequestMapping("/ddd")
-    public BoardDTO ddd() {
-        BoardDTO bd = new BoardDTO();
-        bd.setIboard(1);
-        return bd;
+    @RequestMapping("/cmtSel")
+    public List<BoardCmtDomain> cmtSel(BoardCmtEntity param) {
+        return service.selBoardCmtList(param);
     }
-
-    @ResponseBody
-    @RequestMapping("/ddd2")
-    public List<BoardDTO> ddd2() {
-        List<BoardDTO> list = new ArrayList();
-
-        BoardDTO bd = new BoardDTO();
-        bd.setIboard(1);
-
-        BoardDTO bd2 = new BoardDTO();
-        bd2.setIboard(3);
-
-        list.add(bd);
-        list.add(bd2);
-
-        return list;
-    }
-
 }
