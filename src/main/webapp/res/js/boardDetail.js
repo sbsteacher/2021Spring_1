@@ -15,10 +15,14 @@ function regCmt() {
 function regAjax(param) {
 	const init = {
 		method: 'POST',				
-	    body: JSON.stringify(param)
+	    body: JSON.stringify(param),
+		headers:{
+			'accept' : 'application/json',
+			'content-type' : 'application/json;charset=UTF-8'
+		}
 	};
 	
-	fetch('cmtInsSel', init)
+	fetch('cmtIns', init)
 	.then(function(res) {
 		return res.json();
 	})

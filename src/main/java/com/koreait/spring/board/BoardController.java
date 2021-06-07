@@ -35,12 +35,14 @@ public class BoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/cmtInsSel", method = RequestMethod.POST)
+    @RequestMapping(value="/cmtIns", method = RequestMethod.POST)
     public Map<String, Integer> cmtInsSel(@RequestBody BoardCmtEntity param) {
         System.out.println("param = " + param);
+
+        int result = service.insBoardCmt(param);
+
         Map<String, Integer> data = new HashMap();
-        data.put("result", 1);
-        data.put("age", 11);
+        data.put("result", result);
         return data;
     }
 
