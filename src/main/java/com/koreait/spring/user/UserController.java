@@ -3,9 +3,11 @@ package com.koreait.spring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/user")
@@ -47,6 +49,12 @@ public class UserController {
     @RequestMapping("/profile")
     public String profile() {
         return "user/profile";
+    }
+
+    //@RequestMapping(value="/profile", method=RequestMethod.POST)
+    @PostMapping("/profile")
+    public String profile(MultipartFile profileImg) {
+        return "redirect:" + service.uploadProfile(profileImg);
     }
 
 }
