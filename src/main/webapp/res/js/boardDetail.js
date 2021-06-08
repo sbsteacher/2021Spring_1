@@ -148,15 +148,19 @@ function modAjax() {
 	var cmtModFrmElem = document.querySelector('#cmtModFrm');
 	var param = {
 		icmt: cmtModFrmElem.icmt.value,
-		cmt: cmtModFrmElem.cmt.value
+		cmt: cmtModFrmElem.modCmt.value
 	}
 	
 	const init = {
-		method: 'POST',				
-	    body: new URLSearchParams(param)
+		method: 'PUT',
+	    body: JSON.stringify(param),
+		headers:{
+			'accept' : 'application/json',
+			'content-type' : 'application/json;charset=UTF-8'
+		}
 	};
 	
-	fetch('cmtDelUpd', init)
+	fetch('cmt', init)
 	.then(function(res) {
 		return res.json();
 	})
@@ -178,7 +182,7 @@ function openModModal({icmt, cmt}) {
 	
 	var cmtModFrmElem = document.querySelector('#cmtModFrm');
 	cmtModFrmElem.icmt.value = icmt;
-	cmtModFrmElem.cmt.value = cmt;
+	cmtModFrmElem.modCmt.value = cmt;
 }
 
 function closeModModal() {

@@ -48,6 +48,15 @@ public class BoardController {
     }
 
     @ResponseBody
+    @RequestMapping(value="/cmt", method = RequestMethod.PUT)
+    public Map<String, Integer> cmtUpd(@RequestBody BoardCmtEntity param) {
+        int result = service.updBoardCmt(param);
+        Map<String, Integer> data = new HashMap();
+        data.put("result", result);
+        return data;
+    }
+
+    @ResponseBody
     @RequestMapping(value="/cmt/{icmt}", method = RequestMethod.DELETE)
     public Map<String, Integer> cmtDel(BoardCmtEntity param, @PathVariable int icmt) {
         param.setIcmt(icmt);

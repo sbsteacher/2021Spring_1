@@ -19,6 +19,11 @@
         ORDER BY A.icmt
     </select>
 
+    <update id="updBoardCmt">
+        UPDATE t_board_cmt
+        SET cmt = #{cmt}
+        WHERE icmt = #{icmt} AND iuser = #{iuser}
+    </update>
 
     <delete id="delBoardCmt">
         DELETE FROM t_board_cmt
