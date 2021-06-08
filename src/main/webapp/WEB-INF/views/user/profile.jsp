@@ -11,7 +11,7 @@
             <c:set var="img" value="/res/img/noprofile.jpg"/>
         </c:when>
         <c:otherwise>
-            <c:set var="img" value="/res/img/user/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
+            <c:set var="img" value="/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
         </c:otherwise>
     </c:choose>
     <div>
