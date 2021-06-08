@@ -22,7 +22,7 @@ function regAjax(param) {
 		}
 	};
 	
-	fetch('cmtIns', init)
+	fetch('cmt', init)
 	.then(function(res) {
 		return res.json();
 	})
@@ -45,7 +45,7 @@ function regAjax(param) {
 function getListAjax() {
 	var iboard = cmtListElem.dataset.iboard;
 	
-	fetch('cmtSel?iboard=' + iboard)
+	fetch('cmt/' + iboard)
 	.then(function(res) {
 		return res.json();
 	})
@@ -57,7 +57,6 @@ function getListAjax() {
 }
 
 function makeCmtElemList(data) {
-	
 	cmtListElem.innerHTML = '';
 	var tableElem = document.createElement('table');
 	var trElemTitle = document.createElement('tr');
@@ -80,7 +79,7 @@ function makeCmtElemList(data) {
 	cmtListElem.append(tableElem);
 	
 	var loginUserPk = cmtListElem.dataset.loginUserPk;
-	
+
 	data.forEach(function(item) {
 		var trElemCtnt = document.createElement('tr');
 		var tdElem1 = document.createElement('td');
@@ -91,6 +90,7 @@ function makeCmtElemList(data) {
 		tdElem1.innerText = item.cmt;
 		tdElem2.append(item.writerNm);
 		tdElem3.append(item.regdate);
+
 
 		if(parseInt(loginUserPk) === item.iuser) {
 			var delBtn = document.createElement('button');
@@ -123,12 +123,10 @@ function makeCmtElemList(data) {
 
 		tableElem.append(trElemCtnt);
 	});
-
-
 }
 
 function delAjax(icmt) {
-	fetch('cmtDelUpd?icmt=' + icmt)
+	fetch('cmt/' + icmt, { method: 'DELETE' })
 	.then(function(res) {
 		return res.json();
 	})
