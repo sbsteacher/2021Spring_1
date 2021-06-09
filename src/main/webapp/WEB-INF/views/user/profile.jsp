@@ -14,6 +14,7 @@
             <c:set var="img" value="/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
         </c:otherwise>
     </c:choose>
+    <div>${img}</div>
     <div>
         <form action="profile" method="post" enctype="multipart/form-data" id="frm" onsubmit="return imgChk();">
             이미지변경 : <input type="file" name="profileImg" accept="image/*">
