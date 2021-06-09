@@ -30,6 +30,15 @@ public class BoardController {
         return "board/detail";
     }
 
+    @GetMapping("/writeMod")
+    public void writeMod() {}
+
+    @PostMapping("/writeMod")
+    public String writeMod(BoardEntity param) {
+        int iboard = service.writeMod(param);
+        return "redirect:detail?iboard=" + iboard;
+    }
+
     @ResponseBody
     @RequestMapping(value="/cmt", method = RequestMethod.POST)
     public Map<String, Integer> cmtIns(@RequestBody BoardCmtEntity param) {
