@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -38,6 +41,14 @@ public class UserController {
         System.out.println("uid" + param);
         service.join(param);
         return "redirect:/user/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession hs, HttpServletRequest req) {
+        hs.invalidate();
+        String referer = req.getHeader("Referer");
+        return "redirect:" + referer;
+        //return "redirect:/board/list";
     }
 
     @GetMapping("/profile")
