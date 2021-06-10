@@ -12,7 +12,8 @@ public class MyUtils {
     private HttpSession session;
 
     public int getLoginUserPk() {
-        return getLoginUser().getIuser();
+        UserEntity loginUser = getLoginUser();
+        return loginUser == null ? 0 : loginUser.getIuser();
     }
 
     public UserEntity getLoginUser() {
