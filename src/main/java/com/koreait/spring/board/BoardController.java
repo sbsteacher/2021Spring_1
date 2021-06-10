@@ -31,10 +31,15 @@ public class BoardController {
     }
 
     @GetMapping("/writeMod")
-    public void writeMod() {}
+    public void writeMod(BoardDTO param, Model model) {
+        System.out.println("param = " + param);
+        if(param.getIboard() > 0) {
+            model.addAttribute("data", service.selBoard(param));
+        }
+    }
 
     @PostMapping("/writeMod")
-    public String writeMod(BoardEntity param) {
+    public String writeModProc(BoardEntity param) {
         int iboard = service.writeMod(param);
         return "redirect:detail?iboard=" + iboard;
     }

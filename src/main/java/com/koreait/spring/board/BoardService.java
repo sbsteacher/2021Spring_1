@@ -30,13 +30,12 @@ public class BoardService {
         UserEntity loginUser = (UserEntity)  session.getAttribute("loginUser");
         param.setIuser(loginUser.getIuser());
 
-        if(param.getIboard() == 0) {
-            //등록
-            return 0;
+        if(param.getIboard() == 0) { //등록
+            mapper.insBoard(param);
+        } else { //수정
+            mapper.updBoard(param);
         }
-
-        //수정
-        return 0;
+        return param.getIboard();
     }
 
     public int insBoardCmt(BoardCmtEntity param) {
