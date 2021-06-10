@@ -44,6 +44,12 @@ public class BoardController {
         return "redirect:detail?iboard=" + iboard;
     }
 
+    @GetMapping("/delBoard")
+    public String delBoard(BoardEntity param) {
+        service.delBoard(param);
+        return "redirect:list";
+    }
+
     @ResponseBody
     @RequestMapping(value="/cmt", method = RequestMethod.POST)
     public Map<String, Integer> cmtIns(@RequestBody BoardCmtEntity param) {

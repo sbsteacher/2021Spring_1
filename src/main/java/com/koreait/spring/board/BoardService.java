@@ -1,5 +1,6 @@
 package com.koreait.spring.board;
 
+import com.koreait.spring.MyUtils;
 import com.koreait.spring.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class BoardService {
     private BoardCmtMapper cmtMapper;
 
     @Autowired
-    private HttpSession session;
+    private MyUtils myUtils;
 
     public List<BoardDomain> selBoardList() {
         return mapper.selBoardList();
@@ -27,8 +28,7 @@ public class BoardService {
 
     //return값은 iboard값
     public int writeMod(BoardEntity param) {
-        UserEntity loginUser = (UserEntity)  session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        param.setIuser(myUtils.getLoginUserPk());
 
         if(param.getIboard() == 0) { //등록
             mapper.insBoard(param);
@@ -38,9 +38,18 @@ public class BoardService {
         return param.getIboard();
     }
 
+    public int delBoard(BoardEntity param) {
+        //댓글 먼저 삭제한다.
+        BoardCmtEntity cmtParam = new BoardCmtEntity();
+        cmtParam.setIboard(param.getIboard());
+        cmtMapper.delBoardCmt(cmtParam);
+
+        param.setIuser(myUtils.getLoginUserPk());
+        return mapper.delBoard(param);
+    }
+
     public int insBoardCmt(BoardCmtEntity param) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        param.setIuser(myUtils.getLoginUserPk());
         return cmtMapper.insBoardCmt(param);
     }
     public List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param){
@@ -48,14 +57,12 @@ public class BoardService {
     }
 
     public int updBoardCmt(BoardCmtEntity param) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        param.setIuser(myUtils.getLoginUserPk());
         return cmtMapper.updBoardCmt(param);
     }
 
     public int delBoardCmt(BoardCmtEntity param) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        param.setIuser(myUtils.getLoginUserPk());
         return cmtMapper.delBoardCmt(param);
     }
 }
