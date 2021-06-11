@@ -10,7 +10,7 @@
     </insert>
 
     <select id="selMaxPageVal" resultType="_int">
-        SELECT CEIL(COUNT(iboard) / 5) FROM t_board
+        SELECT CEIL(COUNT(iboard) / #{recordCnt}) FROM t_board
     </select>
 
     <select id="selBoardList" resultType="BoardDomain">

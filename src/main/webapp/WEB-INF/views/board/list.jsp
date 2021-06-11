@@ -1,5 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div>
+    <form action="list" id="frm">
+        <input type="hidden" name="page" value="${ param.page == null ? 1 : param.page }">
+        <select name="recordCnt">
+            <c:forEach begin="5" end="20" step="5" var="cnt">
+                <c:choose>
+                    <c:when test="${cnt eq param.recordCnt}">
+                        <option selected>${cnt}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option>${cnt}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select>
+    </form>
+</div>
 <table>
     <tr>
         <th>번호</th>
@@ -48,3 +65,16 @@
         </tr>
     </c:forEach>
 </table>
+
+<div>
+    <c:forEach begin="1" end="${requestScope.maxPageVal}" var="page">
+        <c:choose>
+            <c:when test="${(empty param.page && page eq 1) || param.page eq page}">
+                <span class="selected">${page}</span>
+            </c:when>
+            <c:otherwise>
+                <span><a href="list?page=${page}&recordCnt=${param.recordCnt}">${page}</a></span>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</div>
