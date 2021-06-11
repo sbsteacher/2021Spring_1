@@ -33,11 +33,16 @@ function makeView(data) {
            moveToDetail(item.iboard);
        });
 
+       let imgSrc = '/res/img/noprofile.jpg';
+       if(item.profileImg != null) {
+           imgSrc = `/img/${item.iuser}/${item.profileImg}`;
+       }
+
        tr.innerHTML = `
             <td>${item.iboard}</td>
             <td>${item.title}</td>
-            <td>${item.writerNm}</td>
-            <td>${item.regdt}</td> 
+            <td>${item.writerNm} <img src="${imgSrc}"></td>
+            <td>${item.regdt}</td>
        `;
     });
 }

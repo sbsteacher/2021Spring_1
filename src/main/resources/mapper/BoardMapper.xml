@@ -9,6 +9,10 @@
         ( #{title}, #{ctnt}, #{iuser} )
     </insert>
 
+    <select id="selMaxPageVal" resultType="_int">
+        SELECT CEIL(COUNT(iboard) / 5) FROM t_board
+    </select>
+
     <select id="selBoardList" resultType="BoardDomain">
         SELECT A.iboard, A.title, A.iuser, A.regdt
              , B.unm AS writerNm, B.profileImg
@@ -25,6 +29,10 @@
         ON A.iboard = C.iboard
         AND C.iuser = #{iuser}
         ORDER BY A.iboard DESC
+        <if test="recordCnt > 0">
+            LIMIT #{startIdx}, #{recordCnt}
+        </if>
+
     </select>
 
     <select id="selBoard" resultType="BoardDomain">

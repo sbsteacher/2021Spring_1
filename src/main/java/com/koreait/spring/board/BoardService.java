@@ -19,6 +19,12 @@ public class BoardService {
 
     public List<BoardDomain> selBoardList(BoardDTO param) {
         param.setIuser(myUtils.getLoginUserPk());
+        final int RECORD_CNT = 5;
+        int startIdx = (param.getPage() - 1) * RECORD_CNT;
+
+        param.setStartIdx(startIdx);
+        param.setRecordCnt(RECORD_CNT);
+
         return mapper.selBoardList(param);
     }
     public BoardDomain selBoard(BoardDTO param) {
