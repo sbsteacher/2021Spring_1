@@ -1,11 +1,9 @@
 package com.koreait.spring.board;
 
 import com.koreait.spring.MyUtils;
-import com.koreait.spring.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -19,8 +17,9 @@ public class BoardService {
     @Autowired
     private MyUtils myUtils;
 
-    public List<BoardDomain> selBoardList() {
-        return mapper.selBoardList();
+    public List<BoardDomain> selBoardList(BoardDTO param) {
+        param.setIuser(myUtils.getLoginUserPk());
+        return mapper.selBoardList(param);
     }
     public BoardDomain selBoard(BoardDTO param) {
         return mapper.selBoard(param);
