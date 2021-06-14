@@ -7,13 +7,22 @@ function getListAjax(page = 1) {
         .then(myJson => {
            console.log(myJson);
            makeView(myJson.list);
-           makePaging(myJson.maxPageVal);
+           makePaging(myJson.maxPageVal, page);
         });
 }
 //페이징 view 만들기
-function makePaging(data) {
-    for(let i=1; i<=data; i++) {
+function makePaging(maxPageVal, selectedPage) {
+    pagingElem.innerHTML = '';
+    for(let i=1; i<=maxPageVal; i++) {
         const span = document.createElement('span');
+        if(selectedPage === i) {
+            span.classList.add('selected');
+        } else {
+            span.classList.add('pointer');
+            span.addEventListener('click', function() {
+                getListAjax(i);
+            });
+        }
         span.innerText = i;
         pagingElem.append(span);
     }
