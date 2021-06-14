@@ -1,14 +1,25 @@
 const listElem = document.querySelector('#list');
+const pagingElem = document.querySelector('#paging');
 
-function getListAjax() {
-    fetch('fav')
+function getListAjax(page = 1) {
+    fetch('fav?page=' + page)
         .then(res => res.json())
         .then(myJson => {
            console.log(myJson);
-           makeView(myJson);
+           makeView(myJson.list);
+           makePaging(myJson.maxPageVal);
         });
 }
+//페이징 view 만들기
+function makePaging(data) {
+    for(let i=1; i<=data; i++) {
+        const span = document.createElement('span');
+        span.innerText = i;
+        pagingElem.append(span);
+    }
+}
 
+//리스트 view 만들기
 function makeView(data) {
     listElem.innerHTML = '';
 
@@ -52,4 +63,3 @@ function moveToDetail(iboard) {
 }
 
 getListAjax();
-getMaxPageAjax();

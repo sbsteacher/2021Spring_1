@@ -10,7 +10,12 @@
     </insert>
 
     <select id="selMaxPageVal" resultType="_int">
-        SELECT CEIL(COUNT(iboard) / #{recordCnt}) FROM t_board
+        SELECT CEIL(COUNT(A.iboard) / #{recordCnt}) FROM t_board A
+        <if test="selType eq 1">
+            INNER JOIN t_board_fav C
+            ON A.iboard = C.iboard
+            AND C.iuser = #{iuser}
+        </if>
     </select>
 
     <select id="selBoardList" resultType="BoardDomain">
