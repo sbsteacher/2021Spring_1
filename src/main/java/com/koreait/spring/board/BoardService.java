@@ -29,6 +29,7 @@ public class BoardService {
 
         return mapper.selBoardList(param);
     }
+
     public BoardDomain selBoard(BoardDTO param) {
         return mapper.selBoard(param);
     }

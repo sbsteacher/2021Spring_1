@@ -52,3 +52,4 @@ function moveToDetail(iboard) {
 }
 
 getListAjax();
+getMaxPageAjax();
